@@ -1,0 +1,12 @@
+#!/bin/bash
+
+perl -pi -w -e 's/module Player/module Opponents.Player_A.Player/g' Sources/Opponents/Player_A/Player.hs
+perl -pi -w -e 's/module Player/module Opponents.Player_B.Player/g' Sources/Opponents/Player_B/Player.hs
+perl -pi -w -e 's/module Opponents.Player_B.Player/module Opponents.Player_A.Player/g' Sources/Opponents/Player_A/Player.hs
+perl -pi -w -e 's/module Opponents.Player_A.Player/module Opponents.Player_B.Player/g' Sources/Opponents/Player_B/Player.hs
+perl -pi -w -e 's/module Player_B.Player/module Opponents.Player_A.Player/g' Sources/Opponents/Player_A/Player.hs
+perl -pi -w -e 's/module Player_A.Player/module Opponents.Player_B.Player/g' Sources/Opponents/Player_B/Player.hs
+perl -pi -w -e 's/module Candidate.Player/module Opponents.Player_A.Player/g' Sources/Opponents/Player_A/Player.hs
+perl -pi -w -e 's/module Candidate.Player/module Opponents.Player_B.Player/g' Sources/Opponents/Player_B/Player.hs
+
+ghc --make -rtsopts -with-rtsopts="-s -K50M -k20M" -dno-debug-output -O2 -Wall Sources/Kalaha.hs -fforce-recomp -iSources -odir build -hidir build -o Kalaha

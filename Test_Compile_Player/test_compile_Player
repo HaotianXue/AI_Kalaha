@@ -1,0 +1,5 @@
+perl -pi -w -e 's/module Player/module Candidate.Player/g' Candidate/Player.hs
+perl -pi -w -e 's/module Opponents.Player_A.Player/module Candidate.Player/g' Candidate/Player.hs
+perl -pi -w -e 's/module Opponents.Player_B.Player/module Candidate.Player/g' Candidate/Player.hs
+
+ghc Test_Player.hs -O2 -Wall -iSources -odir `uname -m` -hidir `uname -m` -XSafe
